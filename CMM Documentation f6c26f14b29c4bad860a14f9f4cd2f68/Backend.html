@@ -1,0 +1,819 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Backend &amp; Database Document</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9c66cd70-ae02-46e9-8bf3-6ef26fa13c80" class="page sans"><header><h1 class="page-title">Backend &amp; Database Document</h1><p class="page-description"></p></header><div class="page-body"><p id="1098e947-e6fb-4eb4-8382-3c31f838020b" class="block-color-blue">← <a href="../CMM%20Documentation%20f6c26f14b29c4bad860a14f9f4cd2f68.html">Back</a></p><h2 id="a47c9a39-3992-472a-9578-e83c3988b713" class="">Table Of Contents</h2><nav id="e883f4c2-4800-43bc-bf75-fa1b71d7e25d" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a47c9a39-3992-472a-9578-e83c3988b713">Table Of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b6f1dba6-4f23-4faf-a9cb-b602d6c8feba">Directory Structure</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4a1c2b56-aafb-4a9f-8ab7-03917a9e531d">Dependencies </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8a29be20-acb8-40b9-b09d-90cc4710eb9e">Database</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#85746454-7fb0-4eed-b94b-c3c51ac38231">Models</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bd062c95-329e-48ad-bb23-c2d4e36505e9">Annual Goals Model (AnnualGoals.js) </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f8f6c21c-1cb6-47f7-ab41-6e48204035fd">Quarter Goals Model (QuarterGoals.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9bd498ba-ad9a-4745-be39-ad59509465b7">Static Data Model (StaticData.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2d79f0de-6d3d-429a-9cce-fc6ff0d2d489">User Model (User.js)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6e56e2ee-71b4-43c0-9f58-6e5e2813e841">Routes</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c3288a1c-ae88-40b8-b06e-5d587d03dc90">Annual Routes (annualRoutes.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9f37e933-0630-4ec2-a974-12b2959187f2">Auth Routes (authRoutes.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f51e0d2c-d770-4f3d-b61f-4931af1f8cb8">Quarter Routes (quarterRoutes.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#677b1e54-edda-4617-8fe2-d813463a5dcc">Root Routes (root.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9032410c-47ed-41ed-b64d-2b784720152f">Static Data Routes (staticRoutes.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ebbceeb1-660c-4dbe-b2bb-1c6ae467d553">User Routes (userRoutes.js)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dd829823-3552-420b-9daa-e52ae3a45a9e">Controllers</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bc4029ad-612c-44a0-b92a-1a33bc20471d">Annual Controller (annualController.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#18c57aa5-ce16-4928-9d20-fa3be491631c">Auth Controller (authController.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#979b7a91-b2a9-41e8-b5a3-58e6b8cda437">Quarter Controller (quarterController.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3b499b56-4bd9-4e43-8110-17f6e0dac259">Static Data Controller (staticDataController.js)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#64ccd72d-c7da-4689-b166-abef8e836ffc">
+User Controller (userController.js)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c578da90-a9c0-49a3-97be-8a2f3c4f58d9">Configuration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4ddc2ec5-a324-4287-a595-fb2d12a3bb51"><strong><strong>CORS Options Configuration (corsOptions.js)</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e1f7f0d3-9841-4aa8-822e-a682aa591301"><code><strong>allowedOrigins</strong></code><strong> </strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ce22c3a8-205d-4806-98da-f0e561afb957"><strong><strong>Database Connection Configuration (dbConn.js)</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a10ecb1a-3f6f-4242-bc54-bfb2c8e58df2"><code><strong>connectDB</strong></code><strong> </strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#955fd3ba-e175-4e88-a023-6ed37c3601ce">Middleware</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b97b7237-7113-4e2a-9b45-ed73534a3c8b"><strong>Custom Error Handling Middleware (errorHandler.js)</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6f10aac8-c91d-4c50-96d6-e1c42b0e27a5"><strong>Middleware for Logging and Request Logging (logger.js)</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1cc7bfa1-f62e-4c84-ae74-3f5094d1ba66">1. <code><strong>logEvents</strong></code></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6de665cc-a549-45ad-b1e4-af0031d74d25"><strong> 2. </strong><code><strong>logger</strong></code></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d705b405-8c99-464d-8669-aac7e798c12d"><strong>Middleware for Rate Limiting Login Requests (loginLimiter.js)</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bad378ec-2c27-40e7-b9ca-523df7252b35">1. <code><strong>loginLimiter</strong></code></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f32a610c-c633-414d-8847-cba28056b4b2"><strong>Middleware for Verifying JSON Web Tokens (JWTs) (verifyJWT.js)</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9ae4847c-3168-4273-9701-d0f2f0cdb427">1.  <code><strong>verifyJWT</strong></code></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#14ed6ce3-8580-4974-8cd8-3242281c7263">
+Deployment</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1593bb9c-b979-4ccc-bfaa-d202e5954248">Production Details</a></div></nav><p id="1aa384b6-3c15-4dc3-9b89-f075769194ff" class="">
+</p><h2 id="b6f1dba6-4f23-4faf-a9cb-b602d6c8feba" class="">Directory Structure</h2><p id="835408f4-6e0e-4cc3-832d-ecbf7b27ef06" class="">Detailed directory structure with their respective paths.</p><p id="6d9aa906-7f56-4b79-8920-ddf25ad985d9" class="">
+</p><p id="eafaca12-7ff8-4c2b-989a-feddad3ccfbb" class="">├── config/
+│   ├── corsOptions.js
+│   └── dbConn.js
+├── controllers/
+│   ├── annualController.js
+│   ├── authController.js
+│   ├── staticDataController.js
+│   ├── quarterController.js
+│   └── userController.js
+├── logs/
+│   ├── errLog.log
+│   ├── mongoLog.log
+│   └── reqLog.log
+├── middleware/
+│   ├── errorHandler.js
+│   ├── logger.js
+│   ├── loginLimiter.js
+│   └── verifyJWT.js
+├── models/
+│   ├── AnnualGoals.js
+│   ├── QuarterGoals.js
+│   ├── StaticCapabilityData.js
+│   └── User.js
+├── public/
+│   └── css/
+│       └── style.css
+├── routes/
+│   ├── annualRoutes.js
+│   ├── authRoutes.js
+│   ├── quarterRoutes.js
+│   ├── root.js
+│   ├── staticData.js
+│   └── userRoutes
+└── views    /
+├── 404.html
+└── index.html</p><p id="4ef5cfcb-641e-4fcd-992e-2768b2a6394c" class="">
+</p><h2 id="4a1c2b56-aafb-4a9f-8ab7-03917a9e531d" class="">Dependencies </h2><p id="de78a389-6da6-4c10-82f4-85199f8e5993" class="">Dependencies used in the app.</p><p id="30eb299f-80d1-4cc7-b6fc-7d4c2f73b3af" class="">
+</p><pre id="7313728a-553f-44e8-aacd-1503dbc0828d" class="code"><code>&quot;dependencies&quot;: {
+		// A library for hashing and securely storing passwords.
+    &quot;bcrypt&quot;: &quot;^5.1.1&quot;,
+
+		// Middleware for parsing HTTP request bodies
+    &quot;body-parser&quot;: &quot;^1.20.2&quot;,
+	
+		// Middleware for parsing cookies in HTTP requests
+    &quot;cookie-parser&quot;: &quot;^1.4.6&quot;,
+
+		// A package for enabling Cross-Origin Resource Sharing (CORS) in your Express application
+    &quot;cors&quot;: &quot;^2.8.5&quot;,
+
+		// A library for working with dates and times in JavaScript
+    &quot;date-fns&quot;: &quot;^2.30.0&quot;,
+
+		// - A module for loading environment variables from a .env file into Node.js applications
+    &quot;dotenv&quot;: &quot;^16.3.1&quot;,
+
+		// A web framework for Node.js
+    &quot;express&quot;: &quot;^4.18.2&quot;,
+
+		// A utility for handling async/await errors in Express applications
+    &quot;express-async-errors&quot;: &quot;^3.1.1&quot;,
+
+		// Middleware for rate-limiting HTTP requests in Express
+    &quot;express-rate-limit&quot;: &quot;^7.0.0&quot;,
+
+		// Built-in module for working with the file system(used for testing
+		// pupose)
+    &quot;fs&quot;: &quot;^0.0.1-security&quot;,
+
+		// A package for creating and verifying JSON Web Tokens (JWTs)
+    &quot;jsonwebtoken&quot;: &quot;^9.0.2&quot;,
+
+		// An elegant MongoDB object modeling tool for Node.js.
+    &quot;mongoose&quot;: &quot;^7.4.4&quot;,
+
+		// A library for generating and working with Universally Unique Identifiers (UUIDs)
+    &quot;uuid&quot;: &quot;^9.0.0&quot;
+  },
+  &quot;devDependencies&quot;: {
+		// A utility that monitors for changes in your Node.js applications and automatically restarts the server during development
+    &quot;nodemon&quot;: &quot;^3.0.1&quot;
+  }</code></pre><p id="98776dd4-17cf-4f0b-8ed5-ee4bc05c0d25" class="">
+</p><h2 id="8a29be20-acb8-40b9-b09d-90cc4710eb9e" class="">Database</h2><p id="0146fa23-0934-4a41-be87-30677f1bb9cb" class="">All the data is stored in MongoDB’s server.
+
+Database - MongoDB Atlas</p><p id="dc3e546c-1492-47fa-a587-9ae371fa27a6" class="">Version - 6.0.10</p><p id="71f93ff0-24c2-4ff9-b1ef-1ab80ad863eb" class="">Database Name - CMM</p><p id="e970ff98-a0ac-494b-b82f-0253540c7d8e" class="">Number of collections - 4
+</p><figure id="659f4f2a-beee-40a1-aea2-c24c60064852" class="image" style="text-align:left"><a href="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled.png"><img style="width:960px" src="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled.png"/></a></figure><p id="34b9854b-f509-42ac-951d-9aa82e786086" class="">
+</p><p id="0acf40fd-57e9-4c16-8903-268983086d6d" class="">
+</p><p id="67af3a26-21a4-4fe5-b2c4-c737a222be3c" class=""><strong>The picture below defines the IP which was given by the Render(at the time of production)</strong></p><figure id="b0194707-f41c-4d9a-b1a3-8d6fd27812ad" class="image"><a href="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%201.png"><img style="width:1404px" src="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%201.png"/></a></figure><p id="27fd4464-3813-4d35-a613-2d2efa643c6a" class="">
+</p><h2 id="85746454-7fb0-4eed-b94b-c3c51ac38231" class="">Models</h2><h3 id="bd062c95-329e-48ad-bb23-c2d4e36505e9" class="">Annual Goals Model (AnnualGoals.js) </h3><p id="68d44cfe-0c18-458d-932a-ded5d2f2d01a" class="">The &quot;AnnualGoal&quot; model represents information related to annual goals for projects. It stores data about the project&#x27;s name, year, capability number(a unique identifier), and the corresponding annual goal value.</p><p id="d1dd0900-1478-4e92-a647-84aea8810df1" class=""><strong>Attributes and Data Types:</strong></p><ul id="a0382b3d-af69-4b34-bec4-fb574e0b932a" class="bulleted-list"><li style="list-style-type:disc"><code><strong>project_name</strong></code> (String): The name of the project for which the annual goal is defined. It is of type string and allows trimming of leading and trailing white spaces.</li></ul><ul id="893f239c-b4de-4188-b89b-485841b28fab" class="bulleted-list"><li style="list-style-type:disc"><code><strong>project_year</strong></code> (String): The year associated with the annual goal. It is of type string.</li></ul><ul id="7a12b9ea-a22d-4f33-87a8-ed51b8551dbd" class="bulleted-list"><li style="list-style-type:disc"><code><strong>number</strong></code> (String): A unique identifier for each annual goal entry. It is of type string and allows trimming of leading and trailing white spaces.</li></ul><ul id="ca5de369-7fd8-4d5b-986f-a061ca93ffb3" class="bulleted-list"><li style="list-style-type:disc"><code><strong>annualGoal</strong></code> (Number): The numeric value representing the annual goal for the project.</li></ul><p id="fab608b1-13de-4aed-a5ff-5a10237b8411" class="">
+</p><h3 id="f8f6c21c-1cb6-47f7-ab41-6e48204035fd" class="">Quarter Goals Model (QuarterGoals.js)</h3><p id="6d173b16-53fd-4126-8c88-69dc48eff186" class="">The &quot;QuarterGoals&quot; model represents information about quarterly goals for projects. It stores data about the project&#x27;s name, year, the quarter, capability number(a unique identifier), the corresponding quarter goal value, and whether the goal has been completed or not.</p><p id="67503ab2-bfa0-4e9f-afc1-d5c619ef4352" class=""><strong>Attributes and Data Types:</strong></p><ul id="b7b50f8d-55ce-4f6d-b8c3-0d78db45f16c" class="bulleted-list"><li style="list-style-type:disc"><code><strong>number</strong></code> (String): A unique identifier for each quarter goal entry. It is of type string.</li></ul><ul id="2e7e7e77-cd39-4ccc-92d8-2bd97e1ca02c" class="bulleted-list"><li style="list-style-type:disc"><code><strong>project_name</strong></code> (String): The name of the project associated with the quarter goal. It is of type string and allows trimming of leading and trailing white spaces.</li></ul><ul id="50c6c904-b03e-4747-8b2f-8fe798f1a8fc" class="bulleted-list"><li style="list-style-type:disc"><code><strong>project_year</strong></code> (String): The year associated with the quarter goal. It is of type string.</li></ul><ul id="f56cc5dd-27f6-4abd-8727-fb408384def3" class="bulleted-list"><li style="list-style-type:disc"><code><strong>quarter</strong></code> (String): The quarter for which the goal is set (e.g., Q1, Q2). It is of type string.</li></ul><ul id="84684407-1739-4e58-a059-2ecce4cdf1c9" class="bulleted-list"><li style="list-style-type:disc"><code><strong>quarterGoal</strong></code> (Number): The numeric value representing the quarter goal for the project.</li></ul><ul id="32e8952b-7422-4dcd-9e8f-6076cbce50d1" class="bulleted-list"><li style="list-style-type:disc"><code><strong>completed</strong></code> (Boolean): A boolean flag indicating whether the quarter goal has been completed. It has a default value of <code><strong>false</strong></code>.</li></ul><p id="8a84786c-2aec-4124-be2e-f97fbd88cf6c" class="">
+</p><h3 id="9bd498ba-ad9a-4745-be39-ad59509465b7" class="">Static Data Model (StaticData.js)</h3><p id="fa050230-60a6-4bbc-84c8-e65f24f159cb" class="">The &quot;StaticData&quot; model represents static data related to capabilities. It stores information about a capability&#x27;s number, level, name, stakeholder, RQIO, and an array of stages associated with the capability.</p><p id="4bf18b10-8aae-4f48-b83f-30535c050c0b" class=""><strong>Attributes and Data Types:</strong></p><ul id="409d5f1c-76ae-40cb-b2b5-fa33a8fd4191" class="bulleted-list"><li style="list-style-type:disc"><code><strong>number</strong></code> (String): A unique identifier for each capability entry. It is of type string and allows trimming of leading and trailing white spaces.</li></ul><ul id="deb5d6ea-6d1b-4872-a564-8775712ff68a" class="bulleted-list"><li style="list-style-type:disc"><code><strong>level</strong></code> (String): The level associated with the capability. It is of type string and is not required to be unique.</li></ul><ul id="8e38d772-cfe6-4b4d-ab4e-4ac5dc2ff54e" class="bulleted-list"><li style="list-style-type:disc"><code><strong>name</strong></code> (String): The name of the capability. It is of type string and is not required to be unique.</li></ul><ul id="c9ab3756-ac95-487c-a403-e8cf94addcb6" class="bulleted-list"><li style="list-style-type:disc"><code><strong>stakeholder</strong></code> (String): The stakeholder related to the capability. It is of type string and allows trimming of leading and trailing white spaces.</li></ul><ul id="c8df5b4c-bdb0-496a-bd02-d632c755756a" class="bulleted-list"><li style="list-style-type:disc"><code><strong>rqio</strong></code> (String): RQIO associated with the capability. It is of type string and allows trimming.</li></ul><ul id="06e10660-72c1-4f0f-9a81-5653a350f91b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>stage</strong></code> (Array of Strings): An array representing the stages associated with the capability. By default, it is an empty array.</li></ul><p id="387db390-0b88-4d5e-98c1-28ddc098ba69" class="">
+</p><h3 id="2d79f0de-6d3d-429a-9cce-fc6ff0d2d489" class="">User Model (User.js)</h3><p id="e0967376-fa27-48ea-a7bd-8463abce88e8" class="">The &quot;User&quot; model represents user accounts in your application. It stores user information, including the username, password (hashed or encrypted), user roles, and whether the user account is active.</p><p id="d3c1a009-7479-4204-8caa-c51e3ac0fdfb" class=""><strong>Attributes and Data Types:</strong></p><ul id="a1737a1a-295f-43d7-b720-75f87ab908aa" class="bulleted-list"><li style="list-style-type:disc"><code><strong>username</strong></code> (String): The username associated with the user account. It is of type string and is required for account creation.</li></ul><ul id="5ed636a5-daec-4d4c-b32f-d820dc2a12dd" class="bulleted-list"><li style="list-style-type:disc"><code><strong>password</strong></code> (String): The user&#x27;s password, typically hashed or encrypted for security. It is of type string and is required for account creation.</li></ul><ul id="3a53f97c-3ed4-4e07-ad5c-80b1eaf1e907" class="bulleted-list"><li style="list-style-type:disc"><code><strong>roles</strong></code> (Array of Strings): An array of user roles associated with the user. By default, it is set to &quot;Employee,&quot; but it can be customized to include other roles as needed.</li></ul><ul id="ee82cd2f-5ddc-4ca5-a582-d87c3a6d22b7" class="bulleted-list"><li style="list-style-type:disc"><code><strong>active</strong></code> (Boolean): A boolean flag indicating whether the user account is currently active. By default, it is set to <code><strong>true</strong></code>.</li></ul><p id="f03be540-1d57-4e4d-8241-392f78d523d1" class="">
+</p><h2 id="6e56e2ee-71b4-43c0-9f58-6e5e2813e841" class="">Routes</h2><h3 id="c3288a1c-ae88-40b8-b06e-5d587d03dc90" class="">Annual Routes (annualRoutes.js)</h3><p id="575d3364-1fbd-48ec-9769-70fb2754c38a" class=""><strong>1. GET /:</strong></p><ul id="335eaf87-b975-4544-a0c0-596ca3323e11" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>annualController.getAllCapabilities</strong></code></li></ul><ul id="a47a5e09-db33-405e-b97f-6aa052885aaa" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> GET</li></ul><ul id="f51bf253-4945-49ec-b79e-ee2968a0c39d" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> None</li></ul><ul id="57900c7a-7c8b-4080-888e-6bff4af012d9" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route retrieves all annual goal data.</li></ul><ul id="d56fc035-c3af-4b1e-b554-8772af9f5442" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="05dd9128-e128-45ef-8e70-0dfdaf032243" class="code code-wrap"><code>router.route(&#x27;/&#x27;).get(annualController.getAllCapabilities);</code></pre></li></ul><p id="bae86e5d-a1de-4e25-b90c-a26e1b9e9a8e" class=""><strong>2. POST /:</strong></p><ul id="4f6d84ef-78cf-43cf-8d6d-a9e7285b3b80" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>annualController.createNewAnnualData</strong></code></li></ul><ul id="53fbeda0-1eeb-4982-b0dd-00f7432e9197" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> POST</li></ul><ul id="1d0f3f8f-6041-42af-bf32-cb2e5d3c9c8f" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> None</li></ul><ul id="5bc39bbd-ce3e-46c2-a49a-a90b05154fe9" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> Expects a JSON array of data to create new annual goal records.</li></ul><ul id="0d5b2288-f99d-4cf8-b4cb-d9c054ca817d" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route creates new annual goal records.</li></ul><ul id="f55e2db3-32c7-46fd-8beb-384fcb30d470" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="e2b5219e-4763-4b4e-8e16-1851df8d18c2" class="code code-wrap"><code>router.route(&#x27;/&#x27;).post(annualController.createNewAnnualData);</code></pre></li></ul><p id="6fa3019d-3612-47cc-af46-417b881f2af7" class=""><strong>3. GET /:projectYear/:projectName:</strong></p><ul id="6580d63f-eede-4320-b096-cd945044a0c2" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>annualController.getAnnualDataByState</strong></code></li></ul><ul id="2fc9802a-1cfa-4da0-9289-2ba0a5b208ca" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> GET</li></ul><ul id="118832f5-8d8b-49d7-9a56-ac1ae1d87629" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> <code><strong>projectYear</strong></code> (string) and <code><strong>projectName</strong></code> (string)</li></ul><ul id="521dc9f2-5311-4a00-9190-94e7662209a7" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> None</li></ul><ul id="caa6431c-8e0b-4119-889c-8a97d0b449a3" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route retrieves annual goal data for a specific project year and name.</li></ul><ul id="210d8e8c-5636-49fb-b437-618062959114" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="a2d82119-bf40-4d3d-b964-83d228d83f6b" class="code code-wrap"><code>router.route(&#x27;/:projectYear/:projectName&#x27;).get(annualController.getAnnualDataByState);</code></pre></li></ul><p id="1bc50709-ac2b-4f8a-b6d3-ca229874de32" class=""><strong>4. PATCH /:projectYear/:projectName:</strong></p><ul id="392c65e9-d08c-4177-b6db-333015e42edf" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>annualController.updateAnnualGoal</strong></code></li></ul><ul id="bad3b4f0-f1e7-4c8b-a046-0b6f77917f7e" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> PATCH</li></ul><ul id="d56cde49-9fc4-4ccb-911d-63ae7061905d" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> <code><strong>projectYear</strong></code> (string) and <code><strong>projectName</strong></code> (string)</li></ul><ul id="c1dc8363-0ead-4db3-a9ba-dc304cfc7238" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> Expects a JSON array with data to update annual goal records for the specified project year and name.</li></ul><ul id="ac5c3309-bb8d-41d2-a5e6-715f85120694" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route updates annual goal records for the specified project year and name.</li></ul><ul id="6138b6f8-d94f-4b16-a138-042616906266" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="7b182633-033f-4b4c-b2ab-bb9fbd08cb49" class="code code-wrap"><code>router.route(&#x27;/:projectYear/:projectName&#x27;).patch(annualController.updateAnnualGoal)</code></pre></li></ul><p id="c9ffbc25-cd52-4b8d-8ca6-a741ae924400" class="">
+</p><h3 id="9f37e933-0630-4ec2-a974-12b2959187f2" class="">Auth Routes (authRoutes.js)</h3><p id="59ae9741-7da3-46e6-a6b4-bd6674383388" class=""><strong>1. POST /:</strong></p><ul id="08518ce5-da3a-44a6-a456-96a248cf24d3" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>authController.login</strong></code></li></ul><ul id="6d5ce0a6-8eaf-49ec-b81a-12897adff06a" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> POST</li></ul><ul id="00974769-ff58-4a07-a37f-1919de98a940" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> None</li></ul><ul id="97a8ba5d-726f-475e-aa3f-9debbb196353" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> Expects a JSON object with <code><strong>username</strong></code> and <code><strong>password</strong></code> for user login.</li></ul><ul id="af9f2a96-207b-4da4-bf30-85fa1361c31c" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route allows users to log in by providing their credentials.</li></ul><ul id="d1b7a833-1407-422a-ab21-68618e1c29e5" class="bulleted-list"><li style="list-style-type:disc"><strong>Middleware:</strong> It uses the <code><strong>loginLimiter</strong></code> middleware, which could be a rate limiter to limit login attempts.</li></ul><ul id="550b579a-7d7e-4a45-9cd7-560479e8abb0" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="213192a6-3b7d-4a5c-8242-567c83d810f3" class="code code-wrap"><code>router.route(&#x27;/&#x27;).post(loginLimiter, authController.login);</code></pre></li></ul><p id="617e336c-d66c-4df2-afe6-4683212779a2" class=""><strong>2. GET /refresh:</strong></p><ul id="2f41cdc9-5c4e-4918-8d09-1b73ccea4481" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>authController.refresh</strong></code></li></ul><ul id="47f9cf94-b7ba-4219-badf-6401ba62df1e" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> GET</li></ul><ul id="b9748d7e-0a16-47ff-9ef7-713bbe7b8cbf" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> None</li></ul><ul id="044cf0f6-c61f-45df-8b18-0d9e2405c3c1" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> None</li></ul><ul id="3fdeb11a-9df6-4b91-b695-84bbc0d72b84" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route is used to refresh the access token by providing a refresh token in cookies.</li></ul><ul id="58ab6f58-c6a7-42d1-94d0-844e292e2642" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="fece520e-c321-4d30-92b9-576a4b22cc64" class="code code-wrap"><code>router.route(&#x27;/refresh&#x27;).get(authController.refresh);</code></pre></li></ul><p id="64857d54-21d3-49ae-9686-9ba0fcb9c450" class=""><strong>3. POST /logout:</strong></p><ul id="334deb83-0d7d-4489-a41c-a96017602dc5" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>authController.logout</strong></code></li></ul><ul id="c3ea1ea7-8a68-4645-94f2-88bcb2bd1c0a" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> POST</li></ul><ul id="46afb414-8e72-4d04-957d-53480664ef74" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> None</li></ul><ul id="841c0341-c442-438a-9538-40de3b6d6183" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> None</li></ul><ul id="cf4c2e4e-37c4-4669-9005-d108eaa94e42" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route allows users to log out by clearing their session cookie containing the refresh token.</li></ul><ul id="844891d7-798c-4855-80e2-fbb5c1eb1f3d" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="20e1edc4-0482-498c-bcee-6c5c8fe7018c" class="code code-wrap"><code>router.route(&#x27;/logout&#x27;).post(authController.logout);</code></pre></li></ul><p id="caf3c20d-e0b4-49c1-866c-66303e191960" class="">
+</p><p id="01b63faa-d738-44d3-9bb8-f89816f237a9" class="">
+</p><h3 id="f51e0d2c-d770-4f3d-b61f-4931af1f8cb8" class="">Quarter Routes (quarterRoutes.js)</h3><p id="bd17e08f-6903-43d3-954c-7c057caf3f4a" class=""><strong>1. GET /:</strong></p><ul id="7085cb97-9cf6-4ed2-9e19-abbd37891a3d" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>quarterDataController.getAllQuarterCapabilities</strong></code></li></ul><ul id="3c9f6baf-4f15-4ce8-9986-e061ddbe214e" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> GET</li></ul><ul id="54f03d84-68f5-4319-ba48-c3c2fbdd78be" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> None</li></ul><ul id="5d23bd6f-e996-4b0d-bd0e-d96acef2aba9" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> None</li></ul><ul id="bb18f315-2e14-43d5-a917-bc12826fb819" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route retrieves all quarter data capabilities.</li></ul><ul id="4708f120-f8e9-4b0b-86a6-2c89f6c57d11" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="0802dea7-028c-4539-bedd-44c931fa38ed" class="code code-wrap"><code>router.route(&#x27;/&#x27;).get(quarterDataController.getAllQuarterCapabilities);</code></pre></li></ul><p id="8967e19d-11c8-4b37-8c61-051f00d00fbf" class=""><strong>2. POST /:</strong></p><ul id="4449913b-f70c-4484-a2f7-4657a444ed2c" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>quarterDataController.createNewQuarterData</strong></code></li></ul><ul id="ed95da1e-3e1f-492a-be2e-acec812cb495" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> POST</li></ul><ul id="6cdccb7e-b295-4257-bf50-a5ce162489b9" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong> None</li></ul><ul id="7b507398-04eb-465e-9cdc-1950c6abcb97" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> Expects a JSON array with quarter data objects (e.g., <code><strong>{ &quot;number&quot;: &quot;1&quot;, &quot;quarter&quot;: &quot;Q1&quot;, &quot;quarterGoal&quot;: 100, &quot;project_name&quot;: &quot;ProjectA&quot;, &quot;project_year&quot;: &quot;2023&quot; }</strong></code>).</li></ul><ul id="adf9b57f-3cae-4be0-9b28-80fe3902d755" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route is used to create new quarter data records.</li></ul><ul id="ef128559-e39b-42d4-8e7c-1e30655f14f3" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="06d591db-41f7-4832-9432-9b802d53a930" class="code code-wrap"><code>router.route(&#x27;/&#x27;).post(quarterDataController.createNewQuarterData);</code></pre></li></ul><p id="12d62961-7af6-41e1-b0ff-62c3966fa660" class=""><strong>3. GET /:projectYear/:projectName:</strong></p><ul id="a6bc28b7-cb71-4554-8cb7-16ebc48128ba" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>quarterDataController.getQuarterDataByState</strong></code></li></ul><ul id="2e6ab6b3-bfe2-4142-82d2-5f36e1ad4007" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> GET</li></ul><ul id="ced815bc-6893-41ec-ad9d-e950984b898c" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong><ul id="af957fa5-73e5-4e0b-805b-1ce7783c7c32" class="bulleted-list"><li style="list-style-type:circle"><code><strong>projectYear</strong></code>: A parameter representing the project year.</li></ul><ul id="396d0415-88a3-4355-868d-471ad293d5c1" class="bulleted-list"><li style="list-style-type:circle"><code><strong>projectName</strong></code>: A parameter representing the project name.</li></ul></li></ul><ul id="3759e438-6e95-4dce-84d6-14b0a5dfb3a1" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> None</li></ul><ul id="60389406-2dc2-498d-97e2-4ec32c9b9f98" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route retrieves quarter data capabilities specific to a given project year and project name.</li></ul><ul id="a770f4fa-b884-4c88-a672-6aaa1936bd90" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="68c497b5-89ec-45ae-90c6-df3d2211fd13" class="code code-wrap"><code>router.route(&#x27;/:projectYear/:projectName&#x27;).get(quarterDataController.getQuarterDataByState);</code></pre></li></ul><p id="762ecf8a-2283-47f4-8919-b670bcbd7cca" class=""><strong>4. PATCH /:projectYear/:projectName:</strong></p><ul id="715343d5-0a23-47ea-b1f7-941b193c08a6" class="bulleted-list"><li style="list-style-type:disc"><strong>Associated Controller:</strong> <code><strong>quarterDataController.updateQuarterGoalCompletion</strong></code></li></ul><ul id="e4fb2bb0-ea78-440e-a551-439c41bd94c9" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> PATCH</li></ul><ul id="273445a8-f228-48d5-a4be-53708d24e737" class="bulleted-list"><li style="list-style-type:disc"><strong>Expected Parameters:</strong><ul id="5613d6c0-8cc0-4fd1-9651-9905d97eec4d" class="bulleted-list"><li style="list-style-type:circle"><code><strong>projectYear</strong></code>: A parameter representing the project year.</li></ul><ul id="d7c76b72-b393-46b5-8981-7465e1620e8e" class="bulleted-list"><li style="list-style-type:circle"><code><strong>projectName</strong></code>: A parameter representing the project name.</li></ul></li></ul><ul id="a7610d37-b478-490a-a111-89a9d2021c7f" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> Expects a JSON array with objects specifying quarter data updates, including <code><strong>number</strong></code>, <code><strong>quarter</strong></code>, <code><strong>quarterGoal</strong></code>, and <code><strong>completed</strong></code> values.</li></ul><ul id="b14ddd6f-0a6b-47a9-abee-2d7b10a3fc73" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route is used to update the completion status of quarter goals for a specific project year and project name.</li></ul><ul id="52a7e90e-6bf2-411b-8363-a79c4820da1f" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="cfd2f1d8-d532-4160-be5b-a6fee21e9545" class="code code-wrap"><code>router.route(&#x27;/:projectYear/:projectName&#x27;).patch(quarterDataController.updateQuarterGoalCompletion);</code></pre></li></ul><p id="abad22d3-136a-45d7-854a-5810338c4d76" class="">
+</p><h3 id="677b1e54-edda-4617-8fe2-d813463a5dcc" class="">Root Routes (root.js)</h3><p id="a0343a5d-079f-471b-9a85-76cc0d6aa385" class=""><strong>1. GET /^/$|/index(.html)?:</strong></p><ul id="24ba0191-8296-4c16-9427-1ba74341e97b" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> GET</li></ul><ul id="2339c7ea-a12c-409d-a453-e4cb1ba19733" class="bulleted-list"><li style="list-style-type:disc"><strong>Route Pattern:</strong> This route matches the root path <code><strong>/</strong></code> and any request to <code><strong>/index.html</strong></code>, <code><strong>/index</strong></code>, or <code><strong>/index.html</strong></code> using a regular expression.</li></ul><ul id="e81ef1ac-b8f9-4273-95e9-20527f53d31d" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Parameters:</strong> None</li></ul><ul id="a5098c85-786f-4adf-8dad-2bf7af2d63e0" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> None</li></ul><ul id="cc82f56d-19a9-45a9-bbd3-429364f9ef55" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route is responsible for serving an HTML file (presumably your application&#x27;s main index page). When a user accesses the root path or requests the <code><strong>index.html</strong></code> page, this route responds by sending the HTML file located in the <code><strong>views</strong></code> directory. It effectively serves the main entry point of your application.</li></ul><ul id="a747b6fb-2bd5-4e10-97c2-1b0bd16bc6f4" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="ff323c6c-d342-405f-9d6f-b36d348d9706" class="code code-wrap"><code>router.get(&#x27;^/$|/index(.html)?&#x27;, (req, res) =&gt; {
+    res.sendFile(path.join(__dirname, &#x27;..&#x27;, &#x27;views&#x27;, &#x27;index.html&#x27;));
+});</code></pre></li></ul><p id="f6c56fe3-ac1c-4bf8-bf11-bd9b5fed6349" class="">
+</p><h3 id="9032410c-47ed-41ed-b64d-2b784720152f" class="">Static Data Routes (staticRoutes.js)</h3><p id="ce215757-d25f-43fb-9e25-31093f000745" class=""><strong>1. GET /:</strong></p><ul id="78a1321c-9917-41d2-a5be-c54358d401e7" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> GET</li></ul><ul id="511020cd-332a-4aff-86c6-a5ebb169ccc7" class="bulleted-list"><li style="list-style-type:disc"><strong>Route Pattern:</strong> This route matches the root path <code><strong>/</strong></code>.</li></ul><ul id="9d5cd516-7258-44cd-86b7-46b80a8158db" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Parameters:</strong> None</li></ul><ul id="82795173-bd3a-407e-8203-06f8c4e9d818" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> None</li></ul><ul id="338466eb-b9e9-48d9-b68f-6b843cc75710" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route is responsible for retrieving all static data from your application. When accessed via a GET request, it returns a list of static data entries. This data may include information about capabilities, levels, stakeholders, or other static information.</li></ul><ul id="45b01114-06b1-4a5f-9175-3d16d591b18c" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="4d2a5c5b-7541-4309-87e4-a6e2ace192fc" class="code code-wrap"><code>router.route(&#x27;/&#x27;) .get(staticDataController.getAllData)</code></pre></li></ul><p id="0a6b8e8a-6142-4c71-a7be-a073fea6e1e7" class=""><strong>2. POST /:</strong></p><ul id="8a662e63-1954-46e8-bda3-7a00dec8433a" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> POST</li></ul><ul id="f39a17e6-91a1-48da-b86a-cb7d454f93a5" class="bulleted-list"><li style="list-style-type:disc"><strong>Route Pattern:</strong> This route matches the root path <code><strong>/</strong></code>.</li></ul><ul id="b43a4156-babf-431f-9732-5509f9868c3c" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Parameters:</strong> None</li></ul><ul id="234bc752-09b5-4a4b-b5f2-04866e40098b" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> This route expects a request body containing data to create new static entries. This can include properties like <code><strong>number</strong></code>, <code><strong>level</strong></code>, <code><strong>name</strong></code>, <code><strong>stakeholder</strong></code>, <code><strong>rqio</strong></code>, and <code><strong>stage</strong></code>.</li></ul><ul id="4daa35be-98d8-4816-91e5-88294172adba" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route allows you to create new static data entries. It expects a JSON request body with the necessary data for creating these entries. After processing the request, it responds with a success message indicating that the new data has been created.</li></ul><ul id="4891289e-f995-4ea0-b627-3cbdf3fffd45" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="7c07809c-5239-4b97-bbdb-a5fcf9892b2b" class="code code-wrap"><code>router.route(&#x27;/&#x27;).post(staticDataController.createNewStaticData)</code></pre></li></ul><p id="945f3ffe-8aea-4d2a-b37e-7420a68d932f" class="">
+</p><h3 id="ebbceeb1-660c-4dbe-b2bb-1c6ae467d553" class="">User Routes (userRoutes.js)</h3><p id="d4835705-f6f3-4d0c-810f-9cc82f3e526e" class=""><strong>1. GET /:</strong></p><ul id="cc981f2b-4a57-451c-9595-25c2702a9e18" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> GET</li></ul><ul id="2df723fa-ef7b-4864-b649-3894a940da3e" class="bulleted-list"><li style="list-style-type:disc"><strong>Route Pattern:</strong> This route matches the root path <code><strong>/</strong></code>.</li></ul><ul id="fbcea2e9-410a-4499-bc2c-1fe18ab627bf" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Parameters:</strong> None</li></ul><ul id="6d0e220c-a1b0-44da-91e2-57b4696c6b1f" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> None</li></ul><ul id="43535d14-bef4-45c3-9514-c6c3458456e2" class="bulleted-list"><li style="list-style-type:disc"><strong>Middleware:</strong> This route uses the <code><strong>verifyJWT</strong></code> middleware to ensure that only authenticated users can access the endpoints. It verifies the JSON Web Token (JWT) in the request headers.</li></ul><ul id="027edf0f-37a1-4869-b0a4-40eb123a5115" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route is responsible for retrieving all user data from your application. When accessed via a GET request, it returns a list of user entries. It only allows access to authenticated users because of the <code><strong>verifyJWT</strong></code> middleware.</li></ul><ul id="3192f703-7395-4339-af65-759cc75c480e" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="2b4e4ec8-c027-4b08-a63e-743bc32cca61" class="code code-wrap"><code>router.route(&#x27;/&#x27;).get(usersController.getAllUsers)</code></pre></li></ul><p id="f466f87c-aee7-4bc6-8465-c992721ee2fd" class=""><strong>2. POST /:</strong></p><ul id="b6437a14-83dd-48b1-9e68-300e455a1bcf" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> POST</li></ul><ul id="6d4aceef-d170-4189-99be-def52acdad31" class="bulleted-list"><li style="list-style-type:disc"><strong>Route Pattern:</strong> This route matches the root path <code><strong>/</strong></code>.</li></ul><ul id="f38e8d4f-787a-43a2-9e3e-8711cce56ec3" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Parameters:</strong> None</li></ul><ul id="80b9501d-59e8-4dc0-91f5-9ceecc9fc3b5" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> This route expects a request body containing user data to create a new user. This can include properties like <code><strong>username</strong></code>, <code><strong>password</strong></code>, and optionally <code><strong>roles</strong></code>.</li></ul><ul id="952b7993-ddee-4b15-8d09-8d22f55d925b" class="bulleted-list"><li style="list-style-type:disc"><strong>Middleware:</strong> This route uses the <code><strong>verifyJWT</strong></code> middleware to ensure that only authenticated users can create new users.</li></ul><ul id="d4b93482-4e3e-4f3a-979d-2a9578003931" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route allows you to create a new user. It expects a JSON request body with the necessary data for creating a new user. After processing the request, it responds with a success message indicating that the new user has been created.</li></ul><ul id="e9117026-cf13-47ea-8ec3-c5c66a51d19c" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="660cd8d9-8888-46db-b73e-ab30b9560b62" class="code code-wrap"><code>router.route(&#x27;/&#x27;).post(usersController.createNewUser)</code></pre></li></ul><p id="c3e6fc49-bf6a-4cdd-9f1c-f339da09e983" class=""><strong>3. PATCH /:</strong></p><ul id="23967a4d-d9a4-4fea-b27b-96f1b69c8f14" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> PATCH</li></ul><ul id="7f9f7e64-cb44-4512-b274-ac8502565558" class="bulleted-list"><li style="list-style-type:disc"><strong>Route Pattern:</strong> This route matches the root path <code><strong>/</strong></code>.</li></ul><ul id="95070c99-16e1-49fd-b03e-eda857bbfac9" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Parameters:</strong> None</li></ul><ul id="fe2e7745-538c-485d-96b1-e4bb64c1484b" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> This route expects a request body containing user data to update an existing user. This includes properties like <code><strong>id</strong></code>, <code><strong>username</strong></code>, <code><strong>roles</strong></code>, <code><strong>active</strong></code>, and optionally <code><strong>password</strong></code>.</li></ul><ul id="fe9d5878-2562-4b87-bc18-9a2b8dc115c3" class="bulleted-list"><li style="list-style-type:disc"><strong>Middleware:</strong> This route uses the <code><strong>verifyJWT</strong></code> middleware to ensure that only authenticated users can update user data.</li></ul><ul id="665cfb30-e77c-447f-b8cc-b64d163babfd" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route allows you to update an existing user&#x27;s data. It expects a JSON request body with the necessary data for updating the user. You need to provide the <code><strong>id</strong></code> of the user you want to update. After processing the request, it responds with a success message indicating that the user&#x27;s data has been updated.</li></ul><ul id="a91df915-d76f-4f06-abb4-63d86517292a" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="3558673a-3995-43ac-b9e2-9aa32049e221" class="code code-wrap"><code>router.route(&#x27;/&#x27;).patch(usersController.updateUser)</code></pre></li></ul><p id="a15f7771-b5d1-4e59-a189-c4ece60d656a" class=""><strong>4. DELETE /:</strong></p><ul id="10863505-a13e-4595-965e-0424571be1a2" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP Method:</strong> DELETE</li></ul><ul id="91fe9dc0-f628-4715-b200-7b55c1a6b96b" class="bulleted-list"><li style="list-style-type:disc"><strong>Route Pattern:</strong> This route matches the root path <code><strong>/</strong></code>.</li></ul><ul id="8cd7d321-4768-4abe-b344-3cc5564c9a04" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Parameters:</strong> None</li></ul><ul id="da43d9a9-19ac-49f9-bf53-84258d05f18b" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Body:</strong> This route expects a request body containing the <code><strong>id</strong></code> of the user to be deleted.</li></ul><ul id="714b7b56-bb91-47c5-a948-589b1a2a0adf" class="bulleted-list"><li style="list-style-type:disc"><strong>Middleware:</strong> This route uses the <code><strong>verifyJWT</strong></code> middleware to ensure that only authenticated users can delete user data.</li></ul><ul id="95d4fa28-2436-48d7-9f8d-6222a394b06a" class="bulleted-list"><li style="list-style-type:disc"><strong>Description:</strong> This route allows you to delete an existing user by providing the user&#x27;s <code><strong>id</strong></code> in the request body. After processing the request, it responds with a success message indicating that the user has been deleted.</li></ul><ul id="6576c6f7-ea68-4461-8a0d-b2aa47c42f7e" class="bulleted-list"><li style="list-style-type:disc"><strong>Code Example:</strong><pre id="e81272f4-a53e-40b1-90a9-e72ca4ba2358" class="code code-wrap"><code>router.route(&#x27;/&#x27;).delete(usersController.deleteUser)</code></pre></li></ul><p id="334786d4-abaf-4a77-a733-a403348358c3" class="">
+</p><h2 id="dd829823-3552-420b-9daa-e52ae3a45a9e" class="">Controllers</h2><h3 id="bc4029ad-612c-44a0-b92a-1a33bc20471d" class="">Annual Controller (annualController.js)</h3><p id="d6324916-f50e-4278-a4ae-d74050a3e06a" class=""><strong>1. getAllCapabilities:</strong></p><ul id="eb7f4914-bef4-481f-a0cd-a855db54302c" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for handling the route to retrieve all capabilities.</li></ul><ul id="fa5ffd67-a248-4e29-9a49-67fe49a7c69d" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a GET request and responds with a JSON array of capabilities. The request does not require any specific data.</li></ul><p id="02070d35-0443-4efe-bc66-d690ce16a4d9" class=""><strong>2. createNewAnnualData:</strong></p><ul id="d9181e09-22a5-4f56-a1c9-9fc77e752a24" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for creating new annual capabilities.</li></ul><ul id="eee93265-6ea5-480f-8b8b-fad0709e23e1" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a POST request and expects an array of data in the request body. It responds with a message indicating the success or failure of the creation.</li></ul><p id="0be91aba-e069-4c3f-b276-efcb01b97357" class=""><strong>3. getAnnualDataByState:</strong></p><ul id="91c01d6c-7c6d-4714-b12d-aa3aa7998ac1" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller retrieves annual data for a specific project and year.</li></ul><ul id="e26ae1e0-a267-4bcc-802e-27ebdc51e592" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a GET request with parameters for project name and project year and responds with a JSON array of combined annual data.</li></ul><p id="0dd27d8a-f7e3-411e-bacb-b34bdb64f0f5" class=""><strong>4. updateAnnualGoal:</strong></p><ul id="97a7400d-bf13-4fe3-b35f-2e9e9792d758" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for updating annual goal values for specific capabilities.</li></ul><ul id="6609b174-84c8-427d-b8d9-10ba792a8d17" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a POST request and expects an array of data in the request body for updating annual goals. It responds with a message indicating the success or failure of the update.</li></ul><p id="8c76a330-e783-42be-96e7-ca487ea02ea8" class="">
+</p><h3 id="18c57aa5-ce16-4928-9d20-fa3be491631c" class="">Auth Controller (authController.js)</h3><p id="0aa385ae-a387-4682-9255-7c078e23faab" class=""><strong>1. login:</strong></p><ul id="27c1b403-a31f-40f4-8e4d-7a1faddff385" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller handles the login process and generates an access token for authorized users.</li></ul><ul id="c99538e7-6bf9-486e-bcb3-663a68c4ceba" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a POST request with the user&#x27;s username and password in the request body. It responds with an access token if the login is successful.</li></ul><p id="c0c184ff-1101-467c-acd1-3f188bc9846d" class=""><strong>2. refresh:</strong></p><ul id="93babbf7-3a84-4d67-b72f-ff9978d296a0" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller handles token refresh for users with valid refresh tokens.</li></ul><ul id="ee011336-14eb-4a96-b087-943f12aeb8c6" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a GET request, checks for a valid refresh token in the request cookie, and responds with a new access token if the refresh token is valid.</li></ul><p id="3ffb2d93-8160-4513-bfea-817e4e7af4aa" class=""><strong>3. logout:</strong></p><ul id="a3c907e2-31ef-4f68-93b1-e4abf20fcc2d" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller handles the user logout process and clears the refresh token cookie.</li></ul><ul id="56f65469-5088-4a5b-a492-279b7b3b77a6" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a POST request, clears the refresh token cookie if it exists, and responds with a confirmation message.</li></ul><p id="4987abab-d272-4143-8008-ab97f12c560a" class="">
+</p><h3 id="979b7a91-b2a9-41e8-b5a3-58e6b8cda437" class="">Quarter Controller (quarterController.js)</h3><p id="51ca52f2-628a-4b14-92b0-e2a1ac0e1afe" class=""><strong>1. getAllQuarterCapabilities:</strong></p><ul id="32d894ef-9335-4af5-b004-45f8c7b3ecb5" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller retrieves all quarter capabilities.</li></ul><ul id="be4f1d09-7bbd-4421-b5e2-ec059954fa01" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a GET request and responds with a JSON array of quarter capabilities. The request does not require any specific data.</li></ul><p id="f54c7b79-1d6c-456e-adda-329f1e9dcbdc" class=""><strong>2. createNewQuarterData:</strong></p><ul id="e4cd0231-11f4-4ffa-a221-e680eec16ed0" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for creating new quarter capabilities.</li></ul><ul id="04d7d017-cc20-4ee6-af59-1a8f42f80b50" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a POST request and expects an array of data in the request body. It responds with a message indicating the success or failure of the creation.</li></ul><p id="fe4b857c-a116-4373-8e11-e82ec9662286" class=""><strong>3. getQuarterDataByState:</strong></p><ul id="484dda10-7dee-4823-8795-accbd5d500c4" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller retrieves quarter capabilities based on project name and project year.</li></ul><ul id="0a5e0664-4fcb-490e-81e1-a48f365469cc" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a GET request with parameters for project name and project year and responds with a JSON array of combined quarter capabilities.</li></ul><p id="9f5d5ad5-184d-4cc4-8775-8624434254c2" class=""><strong>4. updateQuarterGoalCompletion:</strong></p><ul id="d8fbd9f5-80c4-4576-80bc-e76f1eed01d8" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for updating completion status of quarter capabilities.</li></ul><ul id="24849a32-d864-43e8-b7dd-9e210b4a4604" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a POST request and expects an array of data in the request body for updating completion status. It responds with a message indicating the success or failure of the update.</li></ul><p id="ac6fc663-a5d9-422a-8823-4b416c00c35e" class="">
+</p><h3 id="3b499b56-4bd9-4e43-8110-17f6e0dac259" class="">Static Data Controller (staticDataController.js)</h3><p id="672ffdf1-548c-4806-ad12-413d8d0135f0" class=""><strong>1. getAllData:</strong></p><ul id="00b94a7b-0b74-4eb5-9f59-9abfdfaac685" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller retrieves all static capability data.</li></ul><ul id="216312a0-086b-4cea-b8bb-c640d81ddf54" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a GET request and responds with a JSON array of static capability data. The request does not require any specific data.</li></ul><p id="06e8a2ca-05c8-4a5d-bb82-abf37a38bb8a" class=""><strong>2. createNewStaticData:</strong></p><ul id="80c76f4d-0a68-4bf7-83ca-b9db25c9c190" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for creating new static capability data.</li></ul><ul id="f6e098ab-79d3-4bfe-9e13-00926d7e4f58" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a POST request and expects an array of data in the request body. It responds with a message indicating the success or failure of the creation.</li></ul><h3 id="64ccd72d-c7da-4689-b166-abef8e836ffc" class="">
+User Controller (userController.js)</h3><p id="b7e1b9bd-2cb3-4147-9ee2-e2434adb49b5" class=""><strong>1. getAllUsers:</strong></p><ul id="40841907-91ea-4088-b378-8457461b3486" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller retrieves all user data.</li></ul><ul id="7327ff8a-22c1-4fb1-9203-7939cd997862" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a GET request and responds with a JSON array of user data with passwords omitted for security. The request does not require any specific data.</li></ul><p id="3726cfe7-dd94-4b1f-bf07-f6fe4637ddc6" class=""><strong>2. createNewUser:</strong></p><ul id="51071071-2eec-4d54-be7a-ed76032c4e7c" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for creating a new user.</li></ul><ul id="31293aa2-005b-4725-bd15-702632fbde96" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a POST request and expects data in the request body, including username and password. It responds with a message indicating the success or failure of the user creation.</li></ul><p id="8d89b28b-d220-4b86-b739-fa60a6430bb3" class=""><strong>3. updateUser:</strong></p><ul id="d3c1c3f0-7e3f-4071-98df-dc7fc203f230" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for updating user data.</li></ul><ul id="ec168a49-9f03-462f-b9a0-067b39cacec6" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a PUT request and expects data in the request body, including the user&#x27;s ID, username, roles, active status, and password (optional). It responds with a message indicating the success or failure of the user update.</li></ul><p id="aae63fe5-e27d-4e56-aade-1429a9896c02" class=""><strong>4. deleteUser:</strong></p><ul id="4a9e890a-5af3-4ba0-a09c-b1b2362fc4ca" class="bulleted-list"><li style="list-style-type:disc"><strong>Role and Routes:</strong> This controller is responsible for deleting a user.</li></ul><ul id="1a5999f5-edf5-485a-9a36-b131a4db09d5" class="bulleted-list"><li style="list-style-type:disc"><strong>Middleware:</strong> No specific middleware is mentioned.</li></ul><ul id="36fc9b75-7faf-42a3-b494-8d6e4b9c61c8" class="bulleted-list"><li style="list-style-type:disc"><strong>Request and Response:</strong> It handles a DELETE request and expects the user&#x27;s ID in the request body. It responds with a message indicating the success or failure of the user deletion.</li></ul><p id="f6c56097-deec-496f-9174-19e1e2fb4f9d" class="">
+</p><h2 id="c578da90-a9c0-49a3-97be-8a2f3c4f58d9" class="">Configuration</h2><h3 id="4ddc2ec5-a324-4287-a595-fb2d12a3bb51" class=""><strong><strong>CORS Options Configuration (corsOptions.js)</strong></strong></h3><p id="0aa2bb4c-2084-40b4-90c3-07884c5781f2" class="">The code below configures Cross-Origin Resource Sharing (CORS) options for an Express.js application. CORS is a web security feature that controls how web pages in one domain can request resources from another domain. It&#x27;s essential for securing web applications while allowing trusted domains to interact with your server.</p><h3 id="e1f7f0d3-9841-4aa8-822e-a682aa591301" class=""><code><strong>allowedOrigins</strong></code><strong> </strong></h3><ul id="67d5401b-db8f-4d6d-926e-2fc95cc69c9b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>allowedOrigins</strong></code> is an array that contains the origin URLs (domains) permitted to make cross-origin requests to the server.</li></ul><ul id="500aa4c4-6b48-4b46-82bf-9d6eed35d763" class="bulleted-list"><li style="list-style-type:disc">This array defines which domains can access the server&#x27;s resources without CORS restrictions.</li></ul><ul id="3f29673d-533d-4617-9df1-b60fa738b2e0" class="bulleted-list"><li style="list-style-type:disc">Be sure to include all trusted domains that need to interact with your server.</li></ul><p id="66d88ad6-b816-441e-be6e-e4655f2a78d3" class="">
+</p><pre id="f92a687b-280c-40c5-9043-7559730d613e" class="code code-wrap"><code>const allowedOrigins = [
+    &#x27;https://www.cmmudhyam.onrender.com&#x27;,
+    &#x27;https://cmmudhyam.onrender.com&#x27;,
+];</code></pre><p id="8d4a7314-df3c-4542-b7d6-7e1d78c30d28" class="">
+</p><h3 id="ce22c3a8-205d-4806-98da-f0e561afb957" class=""><strong><strong>Database Connection Configuration (dbConn.js)</strong></strong></h3><p id="2d0719d9-37ab-4adf-ad2d-96cae92e8844" class="">The code below defines a function to establish a connection to a MongoDB database using Mongoose, a popular MongoDB ODM (Object-Document Mapper) for Node.js<strong><strong>
+</strong></strong></p><ul id="399069a4-42ad-4ed9-951b-af8437177ec2" class="bulleted-list"><li style="list-style-type:disc">The <code><strong>mongoose</strong></code> library is imported to manage the MongoDB connection.</li></ul><ul id="15553287-c8e8-4961-ad2c-b4fbd09f8d65" class="bulleted-list"><li style="list-style-type:disc">The <code><strong>dotenv</strong></code> library is imported to allow the application to read environment variables from a <code><strong>.env</strong></code> file.</li></ul><h3 id="a10ecb1a-3f6f-4242-bc54-bfb2c8e58df2" class=""><code><strong>connectDB</strong></code><strong> </strong></h3><ul id="e4f40556-aebd-41fd-bbe6-1ced2e9120da" class="bulleted-list"><li style="list-style-type:disc"><code><strong>connectDB</strong></code> is an asynchronous function responsible for connecting to the MongoDB database.</li></ul><ul id="46f9f47f-b593-4d8e-ae8c-fef1461bba9e" class="bulleted-list"><li style="list-style-type:disc">It uses the <code><strong>mongoose.connect</strong></code> method to create a connection to the MongoDB server.</li></ul><p id="551ec241-5b98-4205-b623-88fb630f5c55" class=""><strong>Connection Parameters</strong></p><ul id="cd0a0e0c-70ce-42f3-9296-1d8f8ded0301" class="bulleted-list"><li style="list-style-type:disc">The <code><strong>mongoose.connect</strong></code> method is provided with two arguments:<ol type="1" id="75b6fcb9-a647-40d0-b63f-2494013460c8" class="numbered-list" start="1"><li>The <code><strong>process.env.DATABASE_URL</strong></code> variable, which should contain the URL of the MongoDB database. This URL is typically stored in an environment variable to keep it secure and configurable.</li></ol><ol type="1" id="c46e4dcd-d03d-479e-a95f-048b49fab7c5" class="numbered-list" start="2"><li>An object containing options for the database connection:<ul id="90f13d25-171d-451f-bd62-9a6a1aaf28fd" class="bulleted-list"><li style="list-style-type:disc"><code><strong>useNewUrlParser</strong></code>: This option is set to <code><strong>true</strong></code>, indicating that Mongoose should use the new URL parser to parse the connection string. This is important for compatibility with newer MongoDB versions.</li></ul><ul id="b5772191-d6e0-419d-bbd8-6eed32b9f9a5" class="bulleted-list"><li style="list-style-type:disc"><code><strong>useUnifiedTopology</strong></code>: This option is also set to <code><strong>true</strong></code>, enabling the use of the new Server Discovery and Monitoring engine, which is crucial for managing database server connections efficiently.</li></ul></li></ol></li></ul><p id="93dd243c-09d2-4147-bb96-e4f079b0e87d" class=""><strong>Connection Status Handling</strong></p><ul id="4e260de5-87c6-4f1f-9f91-da46ebb414ea" class="bulleted-list"><li style="list-style-type:disc">The function employs the <code><strong>.then</strong></code> and <code><strong>.catch</strong></code> promise handlers to manage the connection process.</li></ul><ul id="a6a5ae19-8b89-4657-a102-2da44d5236d4" class="bulleted-list"><li style="list-style-type:disc">If the connection is successful, it logs a message indicating that the connection to MongoDB Atlas (or the specified database) was successful.</li></ul><ul id="2e70ea56-39f1-47f6-80b5-3427570787c7" class="bulleted-list"><li style="list-style-type:disc">If there is an error during the connection process, it logs an error message and outputs the error details.</li></ul><pre id="5bfeb3e7-403a-4629-a799-58500f6c21dc" class="code"><code>const mongoose = require(&quot;mongoose&quot;);
+require(&quot;dotenv&quot;).config();
+
+async function connectDB() {
+  mongoose
+    .connect(process.env.DATABASE_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() =&gt; {
+      console.log(&quot;Successfully connected to MongoDB Atlas!&quot;);
+    })
+    .catch((error) =&gt; {
+      console.log(&quot;Unable to connect to MongoDB Atlas!&quot;);
+      console.error(error);
+    });
+}
+
+module.exports = connectDB;</code></pre><p id="a57466f6-95c4-496f-8891-c1571e27ac88" class="">
+</p><h2 id="955fd3ba-e175-4e88-a023-6ed37c3601ce" class="">Middleware</h2><h3 id="b97b7237-7113-4e2a-9b45-ed73534a3c8b" class=""><strong>Custom Error Handling Middleware (errorHandler.js)</strong></h3><p id="0bc91c40-0340-440a-8a16-9166978efe41" class="">The <code><strong>errorHandler</strong></code> is a custom middleware function used in an Express.js application. It&#x27;s designed to handle errors and log them appropriately.</p><ol type="1" id="ee8cb5d3-196a-497c-824f-868ba7843c5a" class="numbered-list" start="1"><li><strong>Logging Errors:</strong><ul id="ecc4660a-d990-466f-92a2-da1d9040de38" class="bulleted-list"><li style="list-style-type:disc">The middleware starts by requiring a <code><strong>logEvents</strong></code> function from a <code><strong>logger</strong></code> module. This function is presumably responsible for logging events, including errors.</li></ul></li></ol><ol type="1" id="2ccc9f29-f8c9-43a5-bc00-e059942ff833" class="numbered-list" start="2"><li><strong>Error Handling:</strong><ul id="83ac3792-4c09-4a73-b9d5-3bc7b0290283" class="bulleted-list"><li style="list-style-type:disc">The <code><strong>errorHandler</strong></code> function is structured to take four arguments: <code><strong>err</strong></code>, <code><strong>req</strong></code>, <code><strong>res</strong></code>, and <code><strong>next</strong></code>. This signature is in line with Express.js middleware functions, where <code><strong>err</strong></code> represents the error, <code><strong>req</strong></code> is the request object, <code><strong>res</strong></code> is the response object, and <code><strong>next</strong></code> is a callback function to pass control to the next middleware.</li></ul></li></ol><ol type="1" id="f7cf6000-fb6c-4c6d-8666-e1119debca96" class="numbered-list" start="3"><li><strong>Logging Errors:</strong><ul id="8a543e5b-486a-4695-959a-6d94e0ae2418" class="bulleted-list"><li style="list-style-type:disc">When an error occurs (such as an unhandled exception or an explicitly thrown error), the <code><strong>errorHandler</strong></code> logs details about the error. This typically includes the error&#x27;s <code><strong>name</strong></code>, <code><strong>message</strong></code>, the HTTP <code><strong>method</strong></code> used in the request, the requested <code><strong>url</strong></code>, and the <code><strong>origin</strong></code> specified in the request headers.</li></ul><ul id="f8871f28-71ec-459d-8931-100dc47f1cb2" class="bulleted-list"><li style="list-style-type:disc">The logged error details are written to a log file named &#x27;errLog.log&#x27;. The format in which the error information is logged can be customized based on the <code><strong>logEvents</strong></code> function used. The specific implementation details of the <code><strong>logEvents</strong></code> function are not shown in this code snippet.</li></ul></li></ol><ol type="1" id="6f2b4d13-c26e-4335-be40-53c3ea8fd15c" class="numbered-list" start="4"><li><strong>HTTP Response:</strong><ul id="7ce9fe02-989a-4617-aa02-112f08c340b4" class="bulleted-list"><li style="list-style-type:disc">The middleware ensures that the response status code (<code><strong>status</strong></code>) is set correctly. If the response object (<code><strong>res</strong></code>) already has a status code set, that code is used. If not, a default status code of <code><strong>500</strong></code> is assigned, indicating a server error.</li></ul></li></ol><ol type="1" id="db283175-08e9-47e4-896f-bb28215ab55e" class="numbered-list" start="5"><li><strong>JSON Response:</strong><ul id="afa02f72-a18c-4f73-b8ea-f6f56103df87" class="bulleted-list"><li style="list-style-type:disc">The middleware sends an HTTP response in JSON format. It returns a JSON object containing:<ul id="2988e8b3-d762-4172-8a4a-b5b267bec52b" class="bulleted-list"><li style="list-style-type:circle"><code><strong>message</strong></code>: A description of the error.</li></ul><ul id="7727f0bb-766d-4e61-b75c-837e30573e79" class="bulleted-list"><li style="list-style-type:circle"><code><strong>isError</strong></code>: A boolean flag indicating that this is an error response.</li></ul></li></ul></li></ol><p id="64db8de1-6c3a-44ca-a49a-2a33004900cb" class="">
+</p><h3 id="6f10aac8-c91d-4c50-96d6-e1c42b0e27a5" class=""><strong>Middleware for Logging and Request Logging (logger.js)</strong></h3><h3 id="1cc7bfa1-f62e-4c84-ae74-3f5094d1ba66" class="">1. <code><strong>logEvents</strong></code></h3><p id="b0f29746-0e18-47bf-95db-18812cbc42cc" class="">The <code><strong>logEvents</strong></code> middleware is responsible for logging events or messages to log files. It performs the following tasks:</p><ul id="22dd0c3c-253d-406d-8fbb-d0988ed95d3d" class="bulleted-list"><li style="list-style-type:disc"><strong>Date Formatting and Unique ID:</strong><ul id="27d5ffc1-39f3-4718-9ef8-bbbe98cdad6f" class="bulleted-list"><li style="list-style-type:circle">It uses the <code><strong>date-fns</strong></code> library to format the current date and time in the &#x27;yyyyMMdd HH:mm:ss&#x27; format.</li></ul><ul id="2ff3c2a7-6c5f-4717-8865-5df036efe1d8" class="bulleted-list"><li style="list-style-type:circle">Generates a unique ID using the <code><strong>uuid</strong></code> library. This ID is used for each log entry to distinguish log items.</li></ul></li></ul><ul id="9b75f2d6-1c37-4248-a308-18ce2fe96f32" class="bulleted-list"><li style="list-style-type:disc"><strong>Creating Log Entry:</strong><ul id="a9a3b9ff-1e84-4a2f-a6ef-6b6cf8b351eb" class="bulleted-list"><li style="list-style-type:circle">Constructs a log entry string with the formatted date, a unique ID, and the provided <code><strong>message</strong></code>.</li></ul><ul id="c7504bf4-3e59-4d8e-bae3-3426540c7c3f" class="bulleted-list"><li style="list-style-type:circle">The log entry string is structured as <code><strong>dateTime UUID message</strong></code>.</li></ul></li></ul><ul id="838bb7b5-7571-42b0-a95c-d303e5619bda" class="bulleted-list"><li style="list-style-type:disc"><strong>Logging to a File:</strong><ul id="22c7e983-6931-4389-9399-8fb3de2887a2" class="bulleted-list"><li style="list-style-type:circle">It checks if a &#x27;logs&#x27; directory exists in the application directory. If not, it creates the &#x27;logs&#x27; directory.</li></ul><ul id="8d7ff1fd-d50b-4628-a7ae-3e83190141ad" class="bulleted-list"><li style="list-style-type:circle">Appends the log entry to a specified log file (the <code><strong>logFileName</strong></code> argument). This log file is located within the &#x27;logs&#x27; directory.</li></ul><ul id="a07b3ebc-467e-4a7a-89ac-0a005661703c" class="bulleted-list"><li style="list-style-type:circle">Handles potential errors during the log creation or file appending and logs any encountered errors.</li></ul></li></ul><h3 id="6de665cc-a549-45ad-b1e4-af0031d74d25" class=""><strong> 2. </strong><code><strong>logger</strong></code></h3><p id="9a04fdea-3d98-404b-9169-95d751cf64b7" class="">The <code><strong>logger</strong></code> middleware is responsible for logging incoming HTTP requests and performing request logging. It performs the following tasks:</p><ul id="9620d5d2-3acf-4bcc-9e82-fecdd3b264cd" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Logging:</strong><ul id="7092b6c4-df56-4d9e-add6-8a8afec69717" class="bulleted-list"><li style="list-style-type:circle">It uses the <code><strong>logEvents</strong></code> function to log incoming HTTP requests.</li></ul><ul id="df13a2bf-ea6a-4d5d-8d53-fccc125649f9" class="bulleted-list"><li style="list-style-type:circle">Records the HTTP method, requested URL, and the &#x27;origin&#x27; header from the request&#x27;s headers.</li></ul></li></ul><ul id="d8270d8c-506e-444e-ba0f-a18b9a04f221" class="bulleted-list"><li style="list-style-type:disc"><strong>Console Logging:</strong><ul id="2ac028e5-4588-40e2-96eb-558b7877bf62" class="bulleted-list"><li style="list-style-type:circle">Logs the HTTP method and the path of the request to the console.</li></ul></li></ul><ul id="5bf8a0ef-26bd-4048-960f-622646301369" class="bulleted-list"><li style="list-style-type:disc"><strong>Next Function:</strong><ul id="e0033c4f-3dc6-496d-8f87-ef85a209938e" class="bulleted-list"><li style="list-style-type:circle">Calls the <code><strong>next()</strong></code> function to pass control to the next middleware in the Express.js pipeline.</li></ul></li></ul><p id="b46c55b2-14f9-4725-8bdf-1815af7c6626" class="">
+</p><h3 id="d705b405-8c99-464d-8669-aac7e798c12d" class=""><strong>Middleware for Rate Limiting Login Requests (loginLimiter.js)</strong></h3><h3 id="bad378ec-2c27-40e7-b9ca-523df7252b35" class="">1. <code><strong>loginLimiter</strong></code></h3><p id="1e628d56-5fb9-4236-a6fd-8ee6ec4cc770" class="">The <code><strong>loginLimiter</strong></code> middleware is responsible for rate limiting login requests from the same IP address. It is created using the <code><strong>rateLimit</strong></code> function from the <code><strong>express-rate-limit</strong></code> package.</p><ul id="b07bf8d5-a638-4cf4-b0ae-5f6b421a1932" class="bulleted-list"><li style="list-style-type:disc"><strong>Rate Limiting Configuration:</strong><ul id="2472dabe-09b8-4bdf-876d-55426ad9924c" class="bulleted-list"><li style="list-style-type:circle"><code><strong>windowMs</strong></code>: It specifies the time window in milliseconds during which the rate limiting is applied. In this case, the window is set to 60 seconds (1 minute).</li></ul><ul id="19434747-a6ed-4b13-9b90-fc1309ca9b1f" class="bulleted-list"><li style="list-style-type:circle"><code><strong>max</strong></code>: It defines the maximum number of requests allowed per IP address within the specified <code><strong>windowMs</strong></code>. Here, it&#x27;s set to 5 login requests per minute.</li></ul></li></ul><ul id="8bf3be9c-1645-4ffe-8a77-96872cf663ec" class="bulleted-list"><li style="list-style-type:disc"><strong>Message and Handler:</strong><ul id="7be822a0-0cfd-4fe5-8757-c5ffe1980ee9" class="bulleted-list"><li style="list-style-type:circle"><code><strong>message</strong></code>: It defines the message that will be sent as a response when the rate limit is exceeded. The message is an object with a <code><strong>message</strong></code> property.</li></ul><ul id="38445847-6aee-4c28-a04b-945f2bff1731" class="bulleted-list"><li style="list-style-type:circle"><code><strong>handler</strong></code>: This function is called when the rate limit is exceeded. It logs an error message using the <code><strong>logEvents</strong></code> function from the provided logger module and sends a response with the rate limit message.</li></ul></li></ul><ul id="91db57c2-6fc3-430f-8fb4-bb82f2c7b088" class="bulleted-list"><li style="list-style-type:disc"><strong>Rate Limit Headers:</strong><ul id="52832650-44b1-4f51-a41a-86e002936076" class="bulleted-list"><li style="list-style-type:circle"><code><strong>standardHeaders</strong></code>: It&#x27;s set to <code><strong>true</strong></code>, indicating that the rate limit information will be returned in the response headers using the <code><strong>RateLimit-*</strong></code> format.</li></ul></li></ul><ul id="e3873060-2917-4c5d-b767-24e73fba3643" class="bulleted-list"><li style="list-style-type:disc"><strong>Legacy Headers:</strong><ul id="222238cb-84ac-44b5-b007-5996041da954" class="bulleted-list"><li style="list-style-type:circle"><code><strong>legacyHeaders</strong></code>: It&#x27;s set to <code><strong>false</strong></code>, indicating that the <code><strong>X-RateLimit-*</strong></code> headers (older format) are disabled.</li></ul></li></ul><p id="02b881b2-6b5a-4a5b-aad2-45ccc62b8c58" class="">
+</p><h3 id="f32a610c-c633-414d-8847-cba28056b4b2" class=""><strong>Middleware for Verifying JSON Web Tokens (JWTs) (verifyJWT.js)</strong></h3><h3 id="9ae4847c-3168-4273-9701-d0f2f0cdb427" class="">1.  <code><strong>verifyJWT</strong></code></h3><p id="115e9e96-110e-4615-b471-1540a3f6778c" class="">The <code><strong>verifyJWT</strong></code> middleware is responsible for checking the validity of a JWT provided in the request&#x27;s <code><strong>Authorization</strong></code> header. It performs the following steps:</p><ul id="84dfb18f-a3fc-497e-89ef-84ff0b27ee83" class="bulleted-list"><li style="list-style-type:disc"><strong>Header Parsing:</strong><ul id="68255094-3bc2-4195-851a-e6021f6d5053" class="bulleted-list"><li style="list-style-type:circle">It first checks the <code><strong>Authorization</strong></code> header in the request for the presence of a JWT.</li></ul><ul id="22cd921b-a493-4acd-8951-503dcd246c1b" class="bulleted-list"><li style="list-style-type:circle">If the header does not exist or does not start with &#x27;Bearer &#x27;, it returns a 401 (Unauthorized) response.</li></ul></li></ul><ul id="30e3d3ac-25af-401a-bc67-f978b3639c9a" class="bulleted-list"><li style="list-style-type:disc"><strong>JWT Extraction:</strong><ul id="00f758f3-ac3b-46e2-8650-8e016182708c" class="bulleted-list"><li style="list-style-type:circle">If the <code><strong>Authorization</strong></code> header is properly formatted (e.g., &#x27;Bearer [token]&#x27;), it splits the header to extract the token portion (the second part).</li></ul></li></ul><ul id="c18b9fcd-f13e-4d66-b00f-1d91f92d0cfa" class="bulleted-list"><li style="list-style-type:disc"><strong>JWT Verification:</strong><ul id="5e9a4a31-9265-4c66-b80a-2b8ee87c8778" class="bulleted-list"><li style="list-style-type:circle">It uses the <code><strong>jwt.verify</strong></code> method to verify the extracted token.</li></ul><ul id="ec2ed711-1eab-4bef-bfa5-f6cef2c0b0aa" class="bulleted-list"><li style="list-style-type:circle">The <code><strong>jwt.verify</strong></code> function checks the token&#x27;s signature, expiration, and other claims using the provided secret key (<code><strong>process.env.ACCESS_TOKEN_SECRET</strong></code>).</li></ul></li></ul><ul id="2c418886-71d6-451c-b968-a7cef9a3af37" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Enrichment:</strong><ul id="a37840cc-5af0-40cc-bc21-fd121161cd4f" class="bulleted-list"><li style="list-style-type:circle">If the token is successfully verified, the <code><strong>decoded</strong></code> object contains the user information and roles stored in the token&#x27;s payload.</li></ul><ul id="583ffcdc-d74e-4a41-8d8e-8ef13e2ae4a0" class="bulleted-list"><li style="list-style-type:circle">It assigns the username and roles from the decoded token to the <code><strong>req.user</strong></code> and <code><strong>req.roles</strong></code> properties, respectively. This allows subsequent route handlers to access this information.</li></ul></li></ul><ul id="a21f7656-4187-4302-8f6c-ec8582731a96" class="bulleted-list"><li style="list-style-type:disc"><strong>Pass Control:</strong><ul id="bc8cf870-f285-4f96-ade3-f22a9e35e420" class="bulleted-list"><li style="list-style-type:circle">If verification is successful, it calls <code><strong>next()</strong></code> to pass control to the next middleware or route handler.</li></ul></li></ul><h2 id="14ed6ce3-8580-4974-8cd8-3242281c7263" class="">
+Deployment</h2><div id="bb6f701a-12b0-43e9-989c-02e51a9b9eaf" class="column-list"><div id="e281b8e5-8c0e-4775-a153-1fc8a2212041" style="width:50%" class="column"><p id="495d00c2-98f4-4d27-baf4-33b40ba6707d" class="">The Backend is hosted on <a href="https://render.com/">Render</a>’s server as a web service by the name of <a href="https://cmmudhyam-api.onrender.com/">cmmudhyam-api.onrender.com</a>
+
+</p></div><div id="cff35fef-e65f-4dfa-86ba-5a24db69fe6f" style="width:50%" class="column"><figure id="521cd40a-3978-47cb-a459-68a8ddb4fb76" class="image" style="text-align:left"><a href="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%202.png"><img style="width:288px" src="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%202.png"/></a></figure></div></div><p id="e7220a0a-b2cf-46c5-adbc-56cf8f35ad4f" class="">Environment variables are used in the backend development. (The following picture contains only the keys due to security purpose)</p><figure id="ec3e471e-42df-4382-894e-1c3069c150a3" class="image"><a href="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%203.png"><img style="width:1307px" src="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%203.png"/></a></figure><p id="e458384a-9714-498d-abc5-b76c1ec592e0" class="">
+</p><h3 id="1593bb9c-b979-4ccc-bfaa-d202e5954248" class="">Production Details</h3><figure id="c1839a02-b363-48f3-8906-df27f00b58fb" class="image" style="text-align:left"><a href="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%204.png"><img style="width:816px" src="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%204.png"/></a></figure><p id="8dedf5c3-828c-4322-ada2-d3ff113c9959" class="">
+</p><figure id="5dcfc065-912d-4583-8808-c03a31073ea9" class="image" style="text-align:left"><a href="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%205.png"><img style="width:816px" src="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%205.png"/></a></figure><figure id="afba8dd3-576d-4e6c-a220-a1c004469a3b" class="image" style="text-align:left"><a href="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%206.png"><img style="width:816px" src="Backend%20&amp;%20Database%20Document%209c66cd70ae0246e98bf36ef26fa13c80/Untitled%206.png"/></a></figure></div></article></body></html>
